@@ -64,27 +64,39 @@ function mostrarJuego() {
   }
   document.title = `${j.titulo} — ${SITIO.nombre}`;
 
-  const capturas = [0, 1, 2].map(i => j.capturas[i]
-    ? `<button data-src="${esc(j.capturas[i])}" aria-label="Ampliar captura ${i + 1}"><img src="${esc(j.capturas[i])}" alt="Captura ${i + 1} de ${esc(j.titulo)}"></button>`
-    : `<button data-texto="Captura ${i + 1}" aria-label="Ampliar captura ${i + 1}">Captura ${i + 1}</button>`).join("");
+  // Cada parte se muestra solo si tiene contenido en datos.js
+  const titulo = j.logo ? `<img class="logo-juego" src="${esc(j.logo)}" alt="${esc(j.titulo)}">` : esc(j.titulo);
+  const etiqueta = j.etiqueta ? `<span class="etiqueta">${esc(j.etiqueta)}</span>` : "";
+  const resumen = j.resumen ? `<p class="resumen">${esc(j.resumen)}</p>` : "";
+  const descripcion = j.descripcion ? `<p class="descripcion">${esc(j.descripcion)}</p>` : "";
+  const portada = j.portada ? `<img class="portada" src="${esc(j.portada)}" alt="Imagen de ${esc(j.titulo)}">` : "";
 
   const video = j.video
     ? `<video controls preload="metadata" src="${esc(j.video)}"></video>`
     : `<div class="marcador"><div class="play"></div>Tráiler de ${esc(j.titulo)}</div>`;
 
+  const capturas = j.capturas.length
+    ? `<div class="capturas">${j.capturas.map((src, i) =>
+        `<button data-src="${esc(src)}" aria-label="Ampliar captura ${i + 1}"><img src="${esc(src)}" alt="Captura ${i + 1} de ${esc(j.titulo)}"></button>`).join("")}</div>`
+    : "";
+
   const ficha = Object.entries(j.ficha).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
-  const descargas = j.descargas.map(d => `<a class="boton" href="${esc(d.enlace)}" download>Descargar para ${esc(d.sistema)} <small>${esc(d.formato)}</small></a>`).join("");
+  const descargas = j.descargas.map(d =>
+    `<a class="boton" href="${esc(d.enlace)}" download>Descargar para ${esc(d.sistema)}${d.formato ? ` <small>${esc(d.formato)}</small>` : ""}</a>`).join("");
 
   contenedor.innerHTML = `
     <section class="juego" style="--c1:${j.colores[0]};--c2:${j.colores[1]};--c3:${j.colores[2]}">
       <a class="volver" href="index.html">← Volver al inicio</a>
-      <div class="juego-cabecera"><h2>${esc(j.titulo)}</h2><span class="etiqueta">${esc(j.etiqueta)}</span></div>
-      <p class="resumen">${esc(j.resumen)}</p>
+      <div class="juego-cabecera"><h2>${titulo}</h2>${etiqueta}</div>
+      ${resumen}
       <div class="columnas">
-        <div><div class="video">${video}</div><div class="capturas">${capturas}</div></div>
-        <aside class="ficha"><h3>Ficha del juego</h3><dl>${ficha}</dl><div class="descargas">${descargas}</div></aside>
+        <div><div class="video" style="aspect-ratio:${esc(j.proporcionVideo || "16/9")}">${video}</div>${capturas}</div>
+        <div class="lateral">
+          ${portada}
+          <aside class="ficha"><h3>Ficha del juego</h3><dl>${ficha}</dl><div class="descargas">${descargas}</div></aside>
+        </div>
       </div>
-      <p class="descripcion">${esc(j.descripcion)}</p>
+      ${descripcion}
     </section>`;
 
   // Ampliar capturas
@@ -92,7 +104,7 @@ function mostrarJuego() {
   contenedor.addEventListener("click", e => {
     const b = e.target.closest(".capturas button"); if (!b) return;
     grande.style.setProperty("--c1", getComputedStyle(b).backgroundColor);
-    grande.innerHTML = b.dataset.src ? `<img src="${b.dataset.src}" alt="">` : esc(b.dataset.texto);
+    grande.innerHTML = `<img src="${b.dataset.src}" alt="">`;
     visor.showModal();
   });
   visor.addEventListener("click", () => visor.close());

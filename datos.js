@@ -14,33 +14,31 @@ const SITIO = {
    Para agregar uno nuevo: copiá un bloque { ... } completo,
    pegalo después de una coma y cambiá los datos.
    - id:       sin espacios ni tildes (se usa en la dirección web)
-   - portada:  imagen de portada ("" = sin imagen)
+   - logo / portada: imágenes del juego ("" = no se muestran)
    - video:    archivo .mp4 ("" = espacio reservado)
-   - capturas: hasta 3 imágenes, por ejemplo ["foto1.jpg","foto2.jpg"]
+   - capturas: lista de imágenes, por ejemplo ["foto1.jpg","foto2.jpg"]
    - descargas: enlace = dirección real del archivo a descargar
    --------------------------------------------------------- */
 const JUEGOS = [
   {
-    id: "nube-nube",
-    titulo: "Nube Nube",
-    etiqueta: "Aventura",
-    resumen: "Una pequeña nube que busca llover en el lugar correcto.",
-    descripcion: "El jugador guía a Nube por seis islas flotantes. Cada isla plantea un problema que se resuelve con lluvia, viento o descanso. Sin combate ni límite de tiempo: una experiencia pensada para jugar con calma.",
+    id: "pistones-teclados",
+    titulo: "Pistones y Teclados",
+    etiqueta: "",                  // género, por ejemplo "Aventura" ("" = no se muestra)
+    resumen: "",                   // frase corta bajo el título ("" = no se muestra)
+    descripcion: "",               // texto largo al final de la página ("" = no se muestra)
     ficha: {
-      "Género": "Aventura / puzzle",
-      "Plataformas": "Windows, macOS, Linux",
-      "Lanzamiento": "Mar 2026",
-      "Idioma": "Español, inglés",
-      "Peso": "180 MB"
+      "Plataformas": "Windows",
+      "Idioma": "Español"
+      // Podés agregar más datos, por ejemplo: "Género": "...", "Lanzamiento": "...", "Peso": "..."
     },
     colores: ["#6b4a24", "#3f5f30", "#7a5a2c"],   // colores de los espacios reservados
-    portada: "",
-    video: "",
-    capturas: [],
+    logo: "juegos/pistones-teclados/logo.png",       // logo del juego (reemplaza al título escrito)
+    portada: "juegos/pistones-teclados/portada.png", // imagen representativa
+    video: "juegos/pistones-teclados/video.mp4",
+    proporcionVideo: "21/9",       // forma del video: "16/9" (normal) o "21/9" (panorámico)
+    capturas: [],                  // lista de imágenes, por ejemplo ["juegos/pistones-teclados/foto1.png"]
     descargas: [
-      { sistema: "Windows", enlace: "#", formato: ".zip" },
-      { sistema: "macOS",   enlace: "#", formato: ".dmg" },
-      { sistema: "Linux",   enlace: "#", formato: ".tar.gz" }
+      { sistema: "Windows", enlace: "#", formato: "" }   // formato opcional, por ejemplo ".zip"
     ]
   }
 ];

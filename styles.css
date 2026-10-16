@@ -95,7 +95,7 @@ nav ul a:hover, .dd button:hover { color: var(--color-barra-hover); }
 .juego { padding: 40px 0 56px; }
 .volver { display: inline-block; margin-bottom: 20px; color: var(--color-texto-suave); }
 .volver:hover { color: var(--color-texto); }
-.juego-cabecera { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; margin-bottom: 8px; }
+.juego-cabecera { display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; margin-bottom: 8px; }
 .juego h2 { font-size: clamp(34px, 7vw, 56px); }
 .etiqueta { border: 1px solid var(--color-linea); border-radius: 4px; padding: 2px 12px; font-size: 14px; color: var(--color-texto-suave); }
 .resumen { font-size: 20px; color: var(--color-texto-suave); max-width: 52ch; margin: 0 0 28px; }
@@ -123,6 +123,11 @@ nav ul a:hover, .dd button:hover { color: var(--color-barra-hover); }
 .descargas { display: grid; gap: 10px; }
 .descargas .boton { display: flex; }
 .descripcion { max-width: 62ch; margin-top: 28px; color: var(--color-texto-suave); }
+
+/* Logo y portada del juego */
+.logo-juego { display: block; width: min(560px, 100%); height: auto; }
+.lateral { display: grid; gap: 16px; }
+.portada { display: block; width: 100%; height: auto; border-radius: var(--radio); border: 1px solid var(--color-linea); image-rendering: pixelated; }
 
 /* Captura ampliada */
 dialog { border: 0; background: transparent; padding: 0; max-width: 92vw; }
